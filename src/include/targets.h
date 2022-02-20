@@ -12,7 +12,7 @@
 
 #define WORD_ALIGNED_ATTR __attribute__((aligned(4)))
 
-#ifdef PLATFORM_STM32
+#if defined(PLATFORM_STM32) || defined(PLATFORM_ASR6601)
 /* ICACHE_RAM_ATTR1 is always linked into RAM */
 #define ICACHE_RAM_ATTR1  __section(".ram_code")
 /* ICACHE_RAM_ATTR2 is linked into RAM only if enough space */

@@ -8,6 +8,24 @@ static_assert(RATE_BINDING < RATE_MAX, "Binding rate must be below RATE_MAX");
 #if defined(Regulatory_Domain_AU_915) || defined(Regulatory_Domain_EU_868) || defined(Regulatory_Domain_IN_866) \
     || defined(Regulatory_Domain_FCC_915) || defined(Regulatory_Domain_AU_433) || defined(Regulatory_Domain_EU_433)
 
+#if defined(PLATFORM_ASR6601)
+#include "SX126xDriver.h"
+SX126xDriver DMA_ATTR Radio;
+
+expresslrs_mod_settings_s ExpressLRS_AirRateConfig[RATE_MAX] = {
+    {0, RADIO_TYPE_SX127x_LORA, RATE_200HZ, SX126X_LORA_BW_500, SX126X_LORA_SF6, SX126X_LORA_CR_4_7, 5000, TLM_RATIO_1_64, 4, 8, 8},
+    {1, RADIO_TYPE_SX127x_LORA, RATE_100HZ, SX126X_LORA_BW_500, SX126X_LORA_SF7, SX126X_LORA_CR_4_7, 10000, TLM_RATIO_1_64, 4, 8, 8},
+    {2, RADIO_TYPE_SX127x_LORA, RATE_50HZ, SX126X_LORA_BW_500, SX126X_LORA_SF8, SX126X_LORA_CR_4_7, 20000, TLM_RATIO_NO_TLM, 4, 10, 8},
+    {3, RADIO_TYPE_SX127x_LORA, RATE_25HZ, SX126X_LORA_BW_500, SX126X_LORA_SF9, SX126X_LORA_CR_4_7, 40000, TLM_RATIO_NO_TLM, 2, 10, 8}};
+
+expresslrs_rf_pref_params_s ExpressLRS_AirRateRFperf[RATE_MAX] = {
+    {0, RATE_200HZ, -112, 4380, 3000, 2500, 600, 5000},
+    {1, RATE_100HZ, -117, 8770, 3500, 2500, 600, 5000},
+    {2, RATE_50HZ, -120, 18560, 4000, 2500, 600, 5000},
+    {3, RATE_25HZ, -123, 29950, 6000, 4000, 0, 5000}};
+
+#else
+
 #include "SX127xDriver.h"
 SX127xDriver DMA_ATTR Radio;
 
@@ -22,6 +40,7 @@ expresslrs_rf_pref_params_s ExpressLRS_AirRateRFperf[RATE_MAX] = {
     {1, RATE_100HZ, -117, 8770, 3500, 2500, 600, 5000},
     {2, RATE_50HZ, -120, 18560, 4000, 2500, 600, 5000},
     {3, RATE_25HZ, -123, 29950, 6000, 4000, 0, 5000}};
+#endif
 #endif
 
 #if defined(Regulatory_Domain_ISM_2400)

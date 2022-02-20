@@ -4,7 +4,11 @@
 #include "targets.h"
 
 #if defined(Regulatory_Domain_AU_915) || defined(Regulatory_Domain_EU_868)  || defined(Regulatory_Domain_IN_866) || defined(Regulatory_Domain_FCC_915) || defined(Regulatory_Domain_AU_433) || defined(Regulatory_Domain_EU_433)
+#if defined(PLATFORM_ASR6601)
+#include "SX126xDriver.h"
+#else
 #include "SX127xDriver.h"
+#endif
 #elif defined(Regulatory_Domain_ISM_2400)
 #include "SX1280Driver.h"
 #else
@@ -128,7 +132,11 @@ typedef struct expresslrs_mod_settings_s
 #define RATE_DEFAULT 0
 #define RATE_BINDING 2 // 50Hz bind mode
 
+#if defined(PLATFORM_ASR6601)
+extern SX126xDriver Radio;
+#else
 extern SX127xDriver Radio;
+#endif
 
 #elif defined(Regulatory_Domain_ISM_2400)
 #define RATE_MAX 4
