@@ -1,6 +1,7 @@
 import pylink
+import sys
 
-fw = open("boot_asr6601.bin","rb")
+fw = open(sys.argv[1],"rb")
 data = fw.read()
 fw.close()
 
