@@ -1319,6 +1319,8 @@ void reset_into_bootloader(void)
 #elif defined(PLATFORM_ESP8266)
     delay(100);
     ESP.rebootIntoUartDownloadMode();
+#elif defined(PLATFORM_ASR6601)
+	HAL_NVIC_SystemReset();
 #endif
 }
 
