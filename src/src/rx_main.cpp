@@ -1320,7 +1320,7 @@ void reset_into_bootloader(void)
     delay(100);
     ESP.rebootIntoUartDownloadMode();
 #elif defined(PLATFORM_ASR6601)
-	HAL_NVIC_SystemReset();
+	NVIC_SystemReset();
 #endif
 }
 
