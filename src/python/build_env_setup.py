@@ -89,6 +89,8 @@ if "_WIFI" in target_name:
         env.SetDefault(UPLOAD_PORT="elrs_tx.local")
     else:
         env.SetDefault(UPLOAD_PORT="elrs_rx.local")
+        
+env.Replace(UPLOADCMD=UARTupload.on_upload)
 
 if platform != 'native':
     add_target_uploadoption("uploadforce", "Upload even if target mismatch")
